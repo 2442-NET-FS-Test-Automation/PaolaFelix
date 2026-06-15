@@ -1,4 +1,4 @@
-namespace PlaylistKata;
+namespace PlaylistKata.Domain;
 
 public class Song : Track
 {

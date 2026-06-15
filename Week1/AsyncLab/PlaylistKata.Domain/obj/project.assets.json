@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\core-csharp-kata\\core-csharp-kata.csproj",
-      "projectName": "core-csharp-kata",
-      "projectPath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\core-csharp-kata\\core-csharp-kata.csproj",
+      "projectUniqueName": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj",
+      "projectName": "PlaylistKata.Domain",
+      "projectPath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj",
       "packagesPath": "C:\\Users\\Paola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\core-csharp-kata\\obj\\",
+      "outputPath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Paola\\AppData\\Roaming\\NuGet\\NuGet.Config"
