@@ -4,7 +4,7 @@ public abstract class Track
 {
     public string Title {get; set;}
     public string Artist {get; set;}
-    public DateTime RealeaseDate {get; set;}
+    public DateTime ReleaseDate {get; set;}
     public bool IsLiked {get; set;}
     private int _duration;
 
@@ -24,12 +24,12 @@ public abstract class Track
         }
     }
 
-    public Track(string title, string artist, int duration, DateTime realeaseDate)
+    public Track(string title, string artist, int duration, DateTime releaseDate)
     {
         Title = title;
         Artist = artist;
         Duration = duration;
-        RealeaseDate = realeaseDate;
+        ReleaseDate = releaseDate;
         IsLiked = false;
     }
 
