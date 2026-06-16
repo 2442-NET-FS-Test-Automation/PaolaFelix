@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlaylistKata.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c746082b028723c591f554868fea095e346f9d9a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02e8f2ee6c26d6a9241c9ba62abf52afcaf35f3d")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlaylistKata.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlaylistKata.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
