@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "bLZ/U13377A=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\LibraryKata\\LibraryKata.App\\LibraryKata.App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Paola\\.nuget\\packages\\serilog\\4.3.1\\serilog.4.3.1.nupkg.sha512",
+    "C:\\Users\\Paola\\.nuget\\packages\\serilog.sinks.console\\6.1.1\\serilog.sinks.console.6.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}
