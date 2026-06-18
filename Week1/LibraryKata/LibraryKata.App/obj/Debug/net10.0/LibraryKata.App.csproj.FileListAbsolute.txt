@@ -17,3 +17,5 @@ C:\Users\Paola\Documents\Revature\PaolaFelix\Week1\LibraryKata\LibraryKata.App\o
 C:\Users\Paola\Documents\Revature\PaolaFelix\Week1\LibraryKata\LibraryKata.App\obj\Debug\net10.0\LibraryKata.App.pdb
 C:\Users\Paola\Documents\Revature\PaolaFelix\Week1\LibraryKata\LibraryKata.App\obj\Debug\net10.0\LibraryKata.App.genruntimeconfig.cache
 C:\Users\Paola\Documents\Revature\PaolaFelix\Week1\LibraryKata\LibraryKata.App\obj\Debug\net10.0\ref\LibraryKata.App.dll
+C:\Users\Paola\Documents\Revature\PaolaFelix\Week1\LibraryKata\LibraryKata.App\bin\Debug\net10.0\Serilog.dll
+C:\Users\Paola\Documents\Revature\PaolaFelix\Week1\LibraryKata\LibraryKata.App\bin\Debug\net10.0\Serilog.Sinks.Console.dll

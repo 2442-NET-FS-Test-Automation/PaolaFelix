@@ -1,5 +1,7 @@
 ﻿// If I have code from another namespace I want to use here - I use a using statement
+using Serilog;
 using LibraryKata.Domain;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LibraryKata.App; // A namespace is like a bucket or logical container for different
 // related code files.
@@ -13,8 +15,14 @@ public class Program
     // public - accessible across the program
     // static - Main can be called upon without a Program object. It is a Static/class method. 
     // void - it doesn't return anything
-    public static void Main()
+    public static async Task Main()
     {   
+        //Lets configure Serilog here before any code execution
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .WriteTo.Console()
+            .CreateLogger();
+
         // When I call dotnet run, it finds Main() and begins code execution at the first line of the 
         // main method. I wrote my code, inside DataTypesAndOperators() - a separate method. So if I want 
         // that code to run, I need to call it inside Main()
@@ -27,6 +35,11 @@ public class Program
         ClassesExample();
         OopDemo();
         CollectionsDemo();
+        ExceptionsDemo();
+        AdvancedClssesDemo();
+        await AsyncHttpDemo();
+
+        Log.CloseAndFlush();
     }
 
     // private - accessible only within this class
@@ -296,6 +309,138 @@ public class Program
 
         Console.WriteLine($"Trying to add a third thing in our catalog: {shelf.TryAdd(catalog[2])}");
 
+        
+    }
+
+    public static void ExceptionsDemo()
+    {
+        Console.WriteLine("\n == Exceptions, patterns, logging ==");
+
+        ILibraryRepository repo = new InMemoryLibraryRepository();
+        IUnitOfWork libraryWork = new LibraryUnitOfWork(repo);
+        LibraryItem dune = LibraryItemFactory.Create(ItemKind.Book, "Dune", "Frank Herbert");
+
+        repo.Add(dune);
+        
+        repo.Add(LibraryItemFactory.Create(ItemKind.Magazine, "Wired", "Axel", copies:2));
+
+        libraryWork.Stage("added 2 items");
+        libraryWork.Commit();
+
+        try
+        {
+            LibraryItem missing = repo.GetById(99);
+            Console.WriteLine(missing.Describe());
+        }
+        catch (ItemNotFoundException ex)
+        {
+            Log.Error("Lookup failed for {Id} : {Message}", ex.Id, ex.Message);
+        }
+        catch (LibraryException ex)
+        {
+            Log.Error("Library error: {Message}", ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Log.Error("Non Library error: {Message}", ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("hit out finally block - lookup attempt done");
+        }
+
+        Book noCopies = new Book("Count of Montecristo", "Alejandro Dumas", 0);
+        try
+        {
+            Borrow(noCopies);
+        }
+        catch (ItemNotAvailableException ex)
+        {
+            Log.Warning("Borrow refused: {Message}", ex.Message);
+        }
+    }
+
+    public static void Borrow(Book book)
+    {
+        if (!book.Checkout())
+        {
+            throw new ItemNotAvailableException(book.Title);
+        }
+    }
+
+    public static void AdvancedClssesDemo()
+    {
+        Console.WriteLine("\n == Advanced classes ==");
+        //First, a quick detour, lets interact with the garbage collector
+        Console.WriteLine(GC.GetTotalMemory(forceFullCollection: false)/1024);
+
+        ILibraryRepository repo = new InMemoryLibraryRepository();
+
+        repo.Add(LibraryItemFactory.Create(ItemKind.Book, "Dune", "Frank Herbert"));
+        repo.Add(LibraryItemFactory.Create(ItemKind.Book, "Dune Measiah", "Frank Herbert"));
+        repo.Add(LibraryItemFactory.Create(ItemKind.Magazine, "Wired", "Axel", copies:2));
+
+        Catalog catalog = new();
+
+        foreach(LibraryItem item in repo.GetAll())
+        {
+            catalog.Add(item);
+        }
+
+        Console.WriteLine($" We have {catalog.Authors.Count} unique authors in our catalog");
+
+        foreach (string author in catalog.Authors)
+            Console.WriteLine(author);
+
+        List<LibraryItem> byFrankHerbert = catalog.Find(item => item.Author == "Frank Herbert");
+        Console.WriteLine($"There are {byFrankHerbert.Count} books by Frank Herbert");
+
+        // Lets see how many items in the catalog are lendable
+        Console.WriteLine("We have a mix of lendable and non lendable items");
+
+        foreach(LibraryItem item in catalog.Lendable())
+        {
+            Console.WriteLine($"{item.Title}");
+        }
+
+    }
+    public static async Task AsyncHttpDemo()
+    {
+        OpenLibraryClient client = new();
+
+        string[] isbns = { "9780132350884", "9780201633610"};
+
+        Task<LibraryItem?>[] fetchedBooks = new Task<LibraryItem?>[isbns.Length];
+
+        for (int i = 0; i < isbns.Length; i++)
+        {
+            fetchedBooks[i] = client.FetchIsbnAsync(isbns[i]);
+        }
+
+        LibraryItem?[] foundBooks = await Task.WhenAll(fetchedBooks);
+
+        LibraryItem? firstBookFound = foundBooks.Length > 0 ? foundBooks[0] : null;
+
+        Console.WriteLine($"Fetched: {firstBookFound?.Describe() ?? "nothing"}");
+
+        //Boxing and unboxing - mostly deprecated, replaced by Generics
+        // Sometimes we needed to store value types on the heap, think of adding an int to a list. Before generics (List<T>)
+        // we had ArrayList to accomplish the same thing. Under the hood, an ArrayList couldnt accept value types
+
+        // We have an int
+        int toBeBoxed = 6;
+
+        // We "box" it, by giving wrapping it in an object reference
+        // So now its on the heap
+        object boxed = toBeBoxed; // This boxing process is something like 15-20x slower than just assigning an int
+
+        // Later, say, when we read something from the ArrayList into an int variable
+        int unboxed =(int)boxed;
+
+        //How can we avoid this?
+        // DONT USE OLD NON GENERIC COLLECTIONS
+        // List<T> is modern, uses generics, avoid box-unbox
+        // ArrayList - deprecated, slow, uses boxing and unboxing
         
     }
 
