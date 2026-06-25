@@ -8,7 +8,7 @@ public class Program
     {
         playlist.Add(new Song("the cure", "Olivia Rodrigo", 297, new DateTime(2026, 5,22), "pop", "you seem pretty sad for a girl so in love"));
         playlist.Add(new Song("espresso", "Sabrina Carpenter", 175, new DateTime(2024, 8, 23), "pop", "Short n' Sweet"));
-        playlist.Add(new PodcastEpisode("Semana Santa", "Lupita Villalobos y Kass Quezada", 4020, new DateTime(2026, 4, 29), "Las Alucines", 39));
+        playlist.Add(new PodcastEpisode("Semana Santa", "Lupita Villalobos y Kass Quezada", 4020, new DateTime(2026, 4, 29), "Las Alucines", "2x06"));
 
         var running = true;
         while (running)
@@ -66,9 +66,8 @@ public class Program
             Console.Write("Album: ");
             string album = Console.ReadLine() ?? "";
 
-            AddTrack(title, artist, duration, releaseDate, genre, album);
+            AddSong(title, artist, duration, releaseDate, genre, album);
             Console.WriteLine($"Successfully added Song: \"{title}\"");
-            Console.WriteLine($"Total tracks added: {Track.TracksAdded}");
         }
         else if (typeChoice == 2)
         {
@@ -76,11 +75,10 @@ public class Program
             string showName = Console.ReadLine() ?? "";
 
             Console.Write("Episode Number: ");
-            int episodeNumber = int.Parse(Console.ReadLine() ?? "0");
+            string episodeNumber = Console.ReadLine();
 
-            AddTrack(title, artist, duration, releaseDate, showName, episodeNumber);
+            AddPodcast(title, artist, duration, releaseDate, showName, episodeNumber);
             Console.WriteLine($"Successfully added Podcast Episode: \"{title}\"");
-            Console.WriteLine($"Total tracks added: {Track.TracksAdded}");
         }
         else
         {
@@ -88,16 +86,16 @@ public class Program
         }
     }
 
-    static void AddTrack(string title, string artist, int duration, DateTime releaseDate, string genre, string album)
+    static void AddSong(string title, string artist, int duration, DateTime releaseDate, string genre, string album)
     {
         playlist.Add(new Song(title, artist, duration, releaseDate, genre, album));
-        Track.IncrementTracksAdded();
+ 
     }
 
-    static void AddTrack(string title, string artist, int duration, DateTime releaseDate, string showName, int episodeNumber)
+    static void AddPodcast(string title, string artist, int duration, DateTime releaseDate, string showName, string episodeNumber)
     {
         playlist.Add(new PodcastEpisode(title, artist, duration, releaseDate, showName, episodeNumber));
-        Track.IncrementTracksAdded();
+
     }
 
     static void ListTracks()

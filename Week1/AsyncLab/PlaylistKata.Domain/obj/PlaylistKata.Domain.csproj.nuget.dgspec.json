@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj": {}
+    "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj": {
+    "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj",
         "projectName": "PlaylistKata.Domain",
-        "projectPath": "c:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj",
+        "projectPath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\PlaylistKata.Domain.csproj",
         "packagesPath": "C:\\Users\\Paola\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\AsyncLab\\PlaylistKata.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Paola\\AppData\\Roaming\\NuGet\\NuGet.Config"

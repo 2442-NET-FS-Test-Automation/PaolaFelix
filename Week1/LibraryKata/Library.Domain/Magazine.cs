@@ -1,5 +1,9 @@
 namespace LibraryKata.Domain;
 
+// Sealed is pretty simple, it means this class is not inheritable
+// Nobody can be a child of magazine. More a signal of intent and design then anything, but still useful
+
+
 public class Magazine: LibraryItem, ILendable
 {
     public int CirculationCopies { get; private set;}

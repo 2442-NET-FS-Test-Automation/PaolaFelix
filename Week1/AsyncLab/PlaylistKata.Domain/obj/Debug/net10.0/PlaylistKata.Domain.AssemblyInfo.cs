@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlaylistKata.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c746082b028723c591f554868fea095e346f9d9a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28b6697027cb3379d0e76998c236f57f8f2330f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlaylistKata.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlaylistKata.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
