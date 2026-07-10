@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DsaThreading")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0043ce26733acfcf6350550ed790e1bbbf82697e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de75e6b112dfcaf523b6cc7d35ff093dac597d04")]
 [assembly: System.Reflection.AssemblyProductAttribute("DsaThreading")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DsaThreading")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
