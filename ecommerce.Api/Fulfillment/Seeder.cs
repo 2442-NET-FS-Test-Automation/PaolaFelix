@@ -10,7 +10,7 @@ namespace ecommerce.Api.Fulfillment;
 public interface ISeeder
 {
     IReadOnlyList<int> SeedOrders(int n, bool expedited);
-    IReadOnlyList<int> ResetAndCreateOrders(int n);
+    void ResetInventory();
 }
 
 public class Seeder : ISeeder
@@ -41,28 +41,28 @@ public class Seeder : ISeeder
         using var db = _factory.CreateDbContext();
 
         var productsBySku = db.Products.ToDictionary(p => p.Sku, p => p);
-
         var ids = new List<int>(n);
 
         for (int i = 0; i < n; i++)
         {
-            string sku = Skus[i % Skus.Length];
-            Product product = productsBySku[sku];
+            int itemCount = Random.Shared.Next(1, 4);
+
+            var selectedProducts = productsBySku.Values
+                .OrderBy(_ => Random.Shared.Next())
+                .Take(itemCount)
+                .ToList();
 
             var order = new Order
             {
                 CustomerId = Random.Shared.Next(1, 5),
                 Priority = expedited ? Priority.Expedited : Priority.Normal,
                 Status = OrderStatus.Pending,
-                Items =
+                Items = selectedProducts.Select(product => new OrderItem
                 {
-                    new OrderItem
-                    {
-                        ProductId = product.Id,
-                        Quantity = 1,
-                        UnitPrice = product.Price
-                    }
-                }
+                    ProductId = product.Id,
+                    Quantity = Random.Shared.Next(1, 3),
+                    UnitPrice = product.Price
+                }).ToList()
             };
 
             db.Orders.Add(order);
@@ -74,11 +74,10 @@ public class Seeder : ISeeder
         return ids;
     }
 
-    public IReadOnlyList<int> ResetAndCreateOrders(int n)
+    public void ResetInventory()
     {
         using var db = _factory.CreateDbContext();
 
-        // Reset inventory to the same values used in EcommerceDbContext seed data.
         var startingStock = new Dictionary<int, int>
         {
             { 1, 20 },
@@ -93,47 +92,14 @@ public class Seeder : ISeeder
             { 10, 14 }
         };
 
-        foreach (ProductInventory inv in db.Inventory)
+        foreach (ProductInventory item in db.Inventory)
         {
-            if (startingStock.TryGetValue(inv.ProductId, out int stock))
+            if (startingStock.TryGetValue(item.ProductId, out int stock))
             {
-                inv.CurrentStock = stock;
+                item.CurrentStock = stock;
             }
         }
 
         db.SaveChanges();
-
-        var productsBySku = db.Products.ToDictionary(p => p.Sku, p => p);
-
-        var ids = new List<int>(n);
-
-        for (int i = 0; i < n; i++)
-        {
-            string sku = Skus[i % Skus.Length];
-            Product product = productsBySku[sku];
-
-            var order = new Order
-            {
-                CustomerId = Random.Shared.Next(1,5),
-                Priority = i % 3 == 0 ? Priority.Expedited : Priority.Normal,
-                Status = OrderStatus.Pending,
-                Items =
-                {
-                    new OrderItem
-                    {
-                        ProductId = product.Id,
-                        Quantity = 1,
-                        UnitPrice = product.Price
-                    }
-                }
-            };
-
-            db.Orders.Add(order);
-            db.SaveChanges();
-
-            ids.Add(order.Id);
-        }
-
-        return ids;
     }
 }

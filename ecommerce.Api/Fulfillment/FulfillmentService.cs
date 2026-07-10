@@ -88,7 +88,7 @@ public class FulfillmentService : IFulfillmentService
                     Notes = "Insufficient stock"
                 });
 
-                await db.SaveChangesAsync(ct);
+                //await db.SaveChangesAsync(ct);
                 await tx.CommitAsync(ct);
 
                 Log.Warning("Backordered {OrderId}: insufficient stock", orderId);
@@ -99,13 +99,13 @@ public class FulfillmentService : IFulfillmentService
             inv.CurrentStock -= item.Quantity;
         }
 
-        order.Status = OrderStatus.Delivered;
+        order.Status = OrderStatus.Fulfilled;
         order.CompletedUtc = DateTime.UtcNow;
 
         db.OrderTracking.Add(new OrderTracking
         {
             OrderId = orderId,
-            Status = OrderStatus.Delivered,
+            Status = OrderStatus.Fulfilled,
             Notes = "Order fulfilled and delivered"
         });
 
