@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mz65bd86H40=",
+  "dgSpecHash": "KoFeLr/+86Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\LibraryKata\\Library.Domain\\Library.Domain.csproj",
+  "projectFilePath": "c:\\Users\\Paola\\Documents\\Revature\\PaolaFelix\\Week1\\LibraryKata\\Library.Domain\\Library.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Paola\\.nuget\\packages\\serilog\\4.3.1\\serilog.4.3.1.nupkg.sha512",
     "C:\\Users\\Paola\\.nuget\\packages\\serilog.sinks.console\\6.1.1\\serilog.sinks.console.6.1.1.nupkg.sha512"
