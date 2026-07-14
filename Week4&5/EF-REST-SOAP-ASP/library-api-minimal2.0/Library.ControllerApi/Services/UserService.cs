@@ -1,0 +1,53 @@
+using Library.Data;
+using Library.Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace Library.ControllerApi.Services;
+
+public class UserService : IUserService
+{
+    private readonly LibraryDbContext _db;
+    // Comes from ASP.NET Identity.
+    private readonly IPasswordHasher<User> _hasher;
+
+    public UserService(LibraryDbContext db, IPasswordHasher<User> hasher)
+    {
+        _db = db;
+        _hasher = hasher;
+    }
+
+    public async Task<string?> RegisterAsync(string username, string password)
+    {
+        // first - trim the string
+        string name = username.Trim();
+
+        // Check to see if the username is already taken
+        if (await _db.Users.AnyAsync(u => u.UserName == name))
+        {
+            return "username is taken";
+        }
+
+        User newUser = new User { UserName = name, Role = "consumer"};
+
+        // Hashing + setting password - uses the newUSer object + password
+        newUser.PasswordHash = _hasher.HashPassword(newUser, password);
+
+        _db.Users.Add(newUser);
+        await _db.SaveChangesAsync();
+        return null; // if all goes well - we return null
+    }
+
+    public async Task<User?> ValidateAsync(string username, string password)
+    {
+        User? foundUser = await _db.Users.SingleOrDefaultAsync(u => u.UserName == username);
+
+        if (foundUser is null) return null; // unknown username and wrong pass look IDENTICAL
+        // probably not the best implementation - you guys can do more checks later
+
+        // Using the hasher to verify a hashed password
+        var result = _hasher.VerifyHashedPassword(foundUser, foundUser.PasswordHash, password);
+
+        return result == PasswordVerificationResult.Failed ? null : foundUser;
+    }
+}
