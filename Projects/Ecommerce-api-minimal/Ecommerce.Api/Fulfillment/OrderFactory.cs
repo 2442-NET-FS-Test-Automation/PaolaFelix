@@ -2,6 +2,8 @@ using ecommerce.Data.Entities;
 
 namespace ecommerce.Api.Fulfillment;
 
+// Responsible for creating new Order objects.
+// It builds orders with the correct priority, status, and order items.
 public class OrderFactory
 {
     private readonly IFulfillmentService _fs;

@@ -8,28 +8,40 @@ using ecommerce.Api.Fulfillment;
 
 namespace ecommerce.Api.Fulfillment;
 
+// Defines the operations that the fulfillment service must provide.
 public interface IFulfillmentService
 {
+    // Processes one order and returns whether it was fulfilled or backordered.
     Task<FulfillmentResult> FulfillOneAsync(int orderId, CancellationToken ct);
+    // Processes multiple orders concurrently.
     Task<BurstResult> FulfillBurstAsync(IEnumerable<int> orderIds, CancellationToken ct);
+    // Finds a product's database ID using its SKU.
     int ResolveProductId(string sku);
+    // Finds a product's current price using its SKU.
     decimal ResolveProductPrice(string sku);
 }
 
+// Represents the two possible results of processing an order.
 public enum FulfillmentResult
 {
     Fulfilled,
     Backordered
 }
 
+// Stores the total number of fulfilled and backordered orders in a burst.
 public record BurstResult(int Fulfilled, int Backordered);
 
+// Handles inventory validation, stock updates, order status changes, 
+// concurrency conflicts, and concurrent burst processing.
 public class FulfillmentService : IFulfillmentService
 {
+    // Creates a separate DbContext for each fulfillment operation.
     private readonly IDbContextFactory<EcommerceDbContext> _factory;
+    // Organizes orders so expedited orders are processed before normal orders.
     private readonly BurstPlanner _planner;
+    // Thread-safe in-memory lookup that maps each SKU to its product ID.
     private readonly ConcurrentDictionary<string, int> _skuToProductId;
-
+    
     public FulfillmentService(IDbContextFactory<EcommerceDbContext> factory, BurstPlanner planner)
     {
         _factory = factory;

@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace ecommerce.Data.Entities;
-
+// This entity represents the products sold in the store. 
+// It contains information like SKU, name, description, size, color, and price.
 public class Product
 {
     public int Id { get; set; }

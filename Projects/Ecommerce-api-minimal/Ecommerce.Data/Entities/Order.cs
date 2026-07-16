@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ecommerce.Data.Entities;
 
+// This entity represents a customer's order. It stores the customer, priority, status, creation date, 
+// completion date, the products being purchased, and the tracking history.
 public class Order
 {
     public int Id { get; set; }

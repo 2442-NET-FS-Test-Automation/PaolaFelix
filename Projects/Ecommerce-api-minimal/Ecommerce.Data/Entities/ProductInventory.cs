@@ -2,7 +2,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ecommerce.Data.Entities;
-
+// This entity stores the inventory for each product. 
+// It keeps track of the current stock, and the RowVersion property 
+// is used for optimistic concurrency so multiple orders can't update 
+// the same inventory record at the same time.
 public class ProductInventory
 {
     public int Id { get; set; }

@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ecommerce.Data.Entities;
 
+// An order can contain multiple products, so each product is stored as an OrderItem. 
+// It keeps the quantity and the unit price at the moment the order was placed.
+
 public class OrderItem
 {
     public int Id { get; set; }

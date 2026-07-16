@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ecommerce.Data.Entities;
 
+// Categories are used to organize products. 
+// Each category can contain multiple products, such as T-Shirts, Hoodies, or Jeans.
 public class Category
 {
     public int Id { get; set; }

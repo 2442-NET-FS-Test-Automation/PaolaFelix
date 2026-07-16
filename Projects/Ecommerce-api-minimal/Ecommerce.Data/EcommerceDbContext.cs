@@ -8,6 +8,8 @@ namespace ecommerce.Data;
 // It tells EF which classes should become tables and how they relate to each other.
 public class EcommerceDbContext : DbContext
 {
+    // The constructor receives the database configuration and passes it to the base 
+    // DbContext class so Entity Framework knows how to connect to the database.
     public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options)
         : base(options)
     {
